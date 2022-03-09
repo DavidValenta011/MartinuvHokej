@@ -67,9 +67,20 @@ for line0 in Lines0:
 	Lines = file1.readlines()
 	 
 	b = []
+	
+	for line in Lines:
+	    #b.append(re.findall('(?<=<span class="oddsCell__noOddsCell">).*?(?=<)',line))
+	    subresult = re.findall('(?<=<span class="oddsCell__noOddsCell">).*?(?=<)',line)
+	    if (len(subresult) > 2):
+	    	b.append([subresult[0], subresult[-1]])
 	 
 	for line in Lines:
-	    b.append(re.findall('(?<=<span class="">).*?(?=<)',line))
+	    myLine = line.replace("oddsCell__lineThrough", "")
+	    #line.replace("oddsCell__lineThrough", "")
+	    b.append(re.findall('(?<=<span class="">).*?(?=<)',myLine))
+	    #b.append(re.findall('(?<=<span class="oddsCell__noOddsCell">).*?(?=<)',myLine))
+	    
+	
 	    
 
 	for i in range (0, len(b)):
