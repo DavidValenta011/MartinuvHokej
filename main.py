@@ -25,8 +25,11 @@ for line0 in Lines0:
 
 	
 	# hlavní sázky
-	print("https://www.livesport.cz/zapas/" + line0 + "/#prehled-zapasu/prehled-zapasu")
-	os.system("google-chrome --headless --dump-dom https://www.livesport.cz/zapas/" + line0.strip() + "/#prehled-zapasu/prehled-zapasu > .tmp/file.html")
+	print("https://www.livesport.cz/zapas/" + line0.strip() + "/#prehled-zapasu/prehled-zapasu")
+	try:
+		os.system("google-chrome --headless --dump-dom https://www.livesport.cz/zapas/" + line0.strip() + "/#/prehled-zapasu/prehled-zapasu > .tmp/file.html")
+	except:
+		print("########## error")
 
 	file1 = open('.tmp/file.html', 'r')
 	Lines = file1.readlines()
@@ -55,7 +58,10 @@ for line0 in Lines0:
 	
 	# sázky asijský hendikep
 	print("google-chrome --headless --dump-dom https://www.livesport.cz/zapas/" + line0.strip() + "/#/srovnani-kurzu/asijsky-handicap/zakladni-doba")
-	os.system("google-chrome --headless --dump-dom https://www.livesport.cz/zapas/" + line0.strip() + "/#/srovnani-kurzu/asijsky-handicap/zakladni-doba > .tmp/file.html")
+	try:
+		os.system("google-chrome --headless --dump-dom https://www.livesport.cz/zapas/" + line0.strip() + "/#/srovnani-kurzu/asijsky-handicap/zakladni-doba > .tmp/file.html")
+	except:
+		print("########## error")
 
 	file1 = open('.tmp/file.html', 'r')
 	Lines = file1.readlines()
@@ -72,10 +78,10 @@ for line0 in Lines0:
 			prefinalData = prefinalData + b[i]
 	finalData.append(prefinalData)
 	
-	
+	"""
 		# hendikepy
-	print("https://www.livesport.cz/zapas/" + line0 + "/#srovnani-kurzu/asijsky-handicap/zakladni-doba")
-	os.system("google-chrome --headless --dump-dom https://www.livesport.cz/zapas/" + line0.strip() + "/#srovnani-kurzu/asijsky-handicap/zakladni-doba > .tmp/file.html")
+	print("https://www.livesport.cz/zapas/" + line0.strip() + "/#/srovnani-kurzu/asijsky-handicap/zakladni-doba")
+	os.system("google-chrome --headless --dump-dom https://www.livesport.cz/zapas/" + line0.strip() + "/#/srovnani-kurzu/asijsky-handicap/zakladni-doba > .tmp/file.html")
 
 	file1 = open('.tmp/file.html', 'r')
 	Lines = file1.readlines()
@@ -94,7 +100,7 @@ for line0 in Lines0:
 			
 	print("count" + str(count))
 	count += 1
-	
+	"""
 			
 f = open("results/resultSazky_" + filePostfix, "w+")
 for i in range (0, len(finalData)):
