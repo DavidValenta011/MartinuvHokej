@@ -3,7 +3,7 @@
 import sys
 import re
 import os
-
+import random
 
 
 
@@ -21,11 +21,14 @@ if (sys.argv[1].startswith("codes/")):
 
 count = 0;
 
+tmpfilename = ".tmp/file" + filePostfix + ".html"
+print(tmpfilename)
+
 for line0 in Lines0:
 
 	
 	# hlavní sázky
-	print("https://www.livesport.cz/zapas/" + line0.strip() + "/#prehled-zapasu/prehled-zapasu")
+	print("google-chrome --headless --dump-dom https://www.livesport.cz/zapas/" + line0.strip() + "/#/prehled-zapasu/prehled-zapasu > " + tmpfilename)
 	try:
 		os.system("google-chrome --headless --dump-dom https://www.livesport.cz/zapas/" + line0.strip() + "/#/prehled-zapasu/prehled-zapasu > .tmp/file.html")
 	except:
@@ -57,7 +60,7 @@ for line0 in Lines0:
 
 	
 	# sázky asijský hendikep
-	print("google-chrome --headless --dump-dom https://www.livesport.cz/zapas/" + line0.strip() + "/#/srovnani-kurzu/asijsky-handicap/zakladni-doba")
+	print("google-chrome --headless --dump-dom https://www.livesport.cz/zapas/" + line0.strip() + "/#/srovnani-kurzu/asijsky-handicap/zakladni-doba" + " filename=" + tmpfilename)
 	try:
 		os.system("google-chrome --headless --dump-dom https://www.livesport.cz/zapas/" + line0.strip() + "/#/srovnani-kurzu/asijsky-handicap/zakladni-doba > .tmp/file.html")
 	except:
@@ -92,7 +95,7 @@ for line0 in Lines0:
 	"""
 		# hendikepy
 	print("https://www.livesport.cz/zapas/" + line0.strip() + "/#/srovnani-kurzu/asijsky-handicap/zakladni-doba")
-	os.system("google-chrome --headless --dump-dom https://www.livesport.cz/zapas/" + line0.strip() + "/#/srovnani-kurzu/asijsky-handicap/zakladni-doba > .tmp/file.html")
+	os.system("google-chrome --headless --dump-dom https://www.livesport.cz/zapas/" + line0.strip() + "/#/srovnani-kurzu/asijsky-handicap/zakladni-doba > " + tmpfilename)
 
 	file1 = open('.tmp/file.html', 'r')
 	Lines = file1.readlines()
@@ -108,10 +111,10 @@ for line0 in Lines0:
 		if (len(b[i]) != 0):
 			print(b[i])
 			prefinalData = prefinalData + b[i]
-			
+	"""		
 	print("count" + str(count))
 	count += 1
-	"""
+	
 			
 f = open("results/resultSazky_" + filePostfix, "w+")
 for i in range (0, len(finalData)):
